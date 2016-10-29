@@ -1,4 +1,4 @@
-import {Cell, Stream, StreamSink} from 'sodiumjs';
+import {Cell, Stream, StreamSink, StreamLoop} from 'sodiumjs';
 
 interface InputEvent extends Event
 {
@@ -12,7 +12,7 @@ class TextField
 
     private input: HTMLInputElement;
 
-    constructor(initText: string)
+    constructor(initText: string, sText: StreamLoop<string> = new StreamLoop<string>())
     {
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
