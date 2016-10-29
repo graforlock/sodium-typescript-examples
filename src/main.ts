@@ -1,30 +1,21 @@
-import Button from './sbutton';
 import SLabel from './slabel';
-import { CellLoop, Stream, transactionally } from 'sodiumjs';
+import STextField from './stext-field';
+
+import {Cell} from 'sodiumjs';
 
 class FRP
 {
     public static main()
     {
-        transactionally(() =>
+        const textA: STextField = new STextField("0");
+        const textB: STextField = new STextField("0");
+
+        const sum: Cell<number> = textA.text.lift(textB.text, (a, b) =>
         {
-            const value: CellLoop<number> = new CellLoop<number>();
-            const label: SLabel = new SLabel(value.map(i => i.toString()));
-
-            const btnPlus: Button = new Button("+");
-            const btnMinus: Button = new Button("-");
-
-            const sDelta: Stream<number> = btnPlus.sClicked.map(u => 1)
-                .orElse(btnMinus.sClicked.map(u => -1));
-
-            const sUpdate: Stream<number> = sDelta.snapshot(value, (delta, _value) =>
-            {
-                return delta + _value;
-            }).filter(n => n >= 0);
-
-            value.loop(sUpdate.hold(0));
-
+            return parseInt(a) + parseInt(b);
         });
+
+        const lblSum: SLabel = new SLabel(sum.map(i => i.toString()));
     }
 }
 
