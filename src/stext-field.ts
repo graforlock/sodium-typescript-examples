@@ -12,7 +12,7 @@ class TextField
 
     private input: HTMLInputElement;
 
-    constructor(initText: string, sText: StreamLoop<string> = new StreamLoop<string>())
+    constructor(initText: string)
     {
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();

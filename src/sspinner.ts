@@ -10,7 +10,7 @@ class SSpinner
     constructor(initValue: number)
     {
         const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-        const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
+        const textField: STextField = new STextField(String(initValue));
 
         this.value = textField.text.map(text =>
         {
