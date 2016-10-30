@@ -6,6 +6,10 @@ Each example is on its own respective branch.
 
 If you wish to contribute, submit a pull request or, alternatively, ask me to be included as a collaborator.
 
+Examples:
+
 - [ ] [Filter Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/filter-primitive)
 - [x] [Lift Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/lift-primitive)
 - [ ] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/spinner)
+
+*- the tick means OK, so its possible to reproduce example with the Typescript API
