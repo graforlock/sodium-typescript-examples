@@ -15,6 +15,17 @@ class SLabel
         this.label = document.createElement('h5');
         this.render();
 
+        /* TODO: Missing Transaction.post() API
+           doesn't allow to sample text at this point.
+
+            Example:
+
+         Transaction.post(0, () =>
+         {
+            this.setText(text.sample());
+         })
+         ;*/
+
     }
 
     setText(t: string)
