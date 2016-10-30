@@ -16,9 +16,8 @@ class TextField
     constructor(initText: string, sText: Stream<string> = new Stream<string>())
     {
 
-        this.allow = sText.map(u => 1)  // Block local changes until remote change has
-        // been completed in the GUI
-        //.orElse(sDecrement)
+        this.allow = sText.map(u => 1)
+            //.orElse(sDecrement)
             .accum(0, (d, b) => b + d).map(b => b == 0);
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
