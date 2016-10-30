@@ -10,15 +10,23 @@ class TextField
     public text: Cell<string>;
     public sUserChanges: Stream<string>;
 
+    private allow: Cell<Boolean>;
     private input: HTMLInputElement;
 
-    constructor(initText: string)
+    constructor(initText: string, sText: Stream<string> = new Stream<string>())
     {
+
+        this.allow = sText.map(u => 1)  // Block local changes until remote change has
+        // been completed in the GUI
+        //.orElse(sDecrement)
+            .accum(0, (d, b) => b + d).map(b => b == 0);
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
 
         this.text = sUserChangesSnk
+            .gate(this.allow)
+            .orElse(sText)
             .filter(s => parseInt(s) === parseInt(s))
             .hold(initText);
 
