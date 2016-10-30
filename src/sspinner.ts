@@ -14,16 +14,15 @@ class SSpinner
         transactionally(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-
-            const plus: SButton = new SButton("+");
-            const minus: SButton = new SButton("-");
-
             const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
 
             this.value = textField.text.map(text => Num.tryParse(text));
 
+            const plus: SButton = new SButton("+");
+            const minus: SButton = new SButton("-");
+
             const sPlusDelta: Stream<number> = plus.sClicked.map(u => 1);
-            const sMinusDelta: Stream<number> = plus.sClicked.map(u => -1);
+            const sMinusDelta: Stream<number> = minus.sClicked.map(u => -1);
             const sDelta: Stream<number> = sPlusDelta.orElse(sMinusDelta);
 
             sSetValue.loop(

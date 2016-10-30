@@ -17,7 +17,6 @@ class TextField
     {
 
         this.allow = sText.map(u => 1)
-            //.orElse(sDecrement)
             .accum(0, (d, b) => b + d).map(b => b == 0);
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
