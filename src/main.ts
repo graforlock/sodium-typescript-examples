@@ -5,6 +5,8 @@ import Component from './Component';
 import STextField from './stext-field';
 import SSpinner from './sspinner';
 import Label from './label';
+import SLabel from './slabel';
+import SButton from './sbutton';
 
 import {transactionally, Cell} from 'sodiumjs';
 
@@ -52,6 +54,18 @@ class FRP
                         ii >= n ? "" : new String(e).trim() === "" ? "<-- enter something" :
                         e.indexOf('@') < 0 ? "<-- must contain @" : "");
             }
+
+            let allValid: Cell<boolean>  = new Cell<boolean>(true);
+
+            for (let i = 0; i < row; i++) {
+
+                let validLabel: SLabel = new SLabel(valids[i]);
+                let thisValid: Cell<boolean> = valids[i].map(t => t === "");
+                thisValid = allValid = allValid.lift(thisValid, (a, b) => a && b);
+
+            }
+
+            const ok: SButton  = new SButton("OK", allValid);
         });
     }
 }
