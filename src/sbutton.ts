@@ -20,25 +20,22 @@ class SButton
             this.sClickedSink.send(Unit.UNIT);
         });
 
-        this.render();
-
         /* TODO: Missing Transactional.post API for:
 
-           Transaction.post(() => this.setEnabled(enabled.sample()));
+            Transaction.post(() => this.setEnabled(enabled.sample()));
 
-        */
+         */
 
         this.l = Operational.updates(enabled).listen(ena => this.setEnabled(ena));
+        this.render();
     }
 
-    setEnabled(enabled: boolean) : void
+    setEnabled(enabled: boolean): void
     {
-        if(enabled === true)
-        {
-            this.button.style.opacity = "1";
-            this.button.style.pointerEvents = "auto";
-        }
+        this.button.style.opacity = enabled ? "1" : "0.5";
+        this.button.style.pointerEvents = enabled ? "auto" : "none";
     }
+
 
     render(): SButton
     {
