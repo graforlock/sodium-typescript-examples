@@ -12,4 +12,4 @@ Examples:
 - [x] [Lift Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/lift-primitive)
 - [ ] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/spinner)
 
-*- the tick means OK, so its possible to reproduce example with the Typescript API
+######*- the tick means _OK: its possible to reproduce example with the Typescript API_
