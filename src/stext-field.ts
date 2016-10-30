@@ -1,11 +1,13 @@
-import {Cell, Stream, StreamSink, StreamLoop} from 'sodiumjs';
+import Component from './Component';
+
+import {Cell, Stream, StreamSink} from 'sodiumjs';
 
 interface InputEvent extends Event
 {
     target;
 }
 
-class TextField
+class TextField implements Component
 {
     private l: any;
     public text: Cell<string>;

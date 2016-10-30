@@ -1,3 +1,4 @@
+import Component from './Component';
 import STextField from './stext-field';
 import SButton from './SButton';
 
@@ -5,9 +6,9 @@ import Num from './Num';
 
 import {StreamLoop, Stream, Cell, transactionally} from 'sodiumjs';
 
-class SSpinner
+class SSpinner implements Component
 {
-    private value: Cell<number>;
+    public value: Cell<number>;
 
     constructor(initValue: number)
     {
