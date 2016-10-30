@@ -48,7 +48,8 @@ class FRP
             {
                 labels[row] = new Label(`Email # ${i + 1}`);
                 const ii: number = i;
-                const email: STextField = new STextField("");
+                const enabled: Cell<Boolean> = num.value.map(n -> ii < n);
+                const email: STextField = new STextField("", /*, enabled */);
                 fields[row] = email;
                 valids[row] = email.text.lift(num.value, (e, n) =>
                         ii >= n ? "" : new String(e).trim() === "" ? "<-- enter something" :
