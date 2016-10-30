@@ -7,6 +7,7 @@ interface InputEvent extends Event
 
 class TextField
 {
+    private l: any;
     public text: Cell<string>;
     public sUserChanges: Stream<string>;
 
@@ -17,7 +18,8 @@ class TextField
     {
 
         this.allow = sText.map(u => 1)
-            .accum(0, (d, b) => b + d).map(b => b == 0);
+            .accum(0, (d, b) => b + d)
+            .map(b => b == 0);
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
@@ -25,7 +27,6 @@ class TextField
         this.text = sUserChangesSnk
             .gate(this.allow)
             .orElse(sText)
-            .filter(s => parseInt(s) === parseInt(s))
             .hold(initText);
 
         this.input = document.createElement('input');
@@ -37,6 +38,9 @@ class TextField
         });
 
         this.render();
+
+        /* Missing Transaction.post() API
+           doesnt allow to register listener at this point. */
     }
 
     render(): void
