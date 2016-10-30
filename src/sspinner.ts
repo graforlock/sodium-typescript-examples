@@ -4,7 +4,7 @@ import SButton from './sbutton';
 
 import Num from './Num';
 
-import {StreamLoop, Stream, Cell, transactionally} from 'sodiumjs';
+import {StreamLoop, Stream, Cell, Transaction} from 'sodiumjs';
 
 class SSpinner implements Component
 {
@@ -12,7 +12,7 @@ class SSpinner implements Component
 
     constructor(initValue: number)
     {
-        transactionally(() =>
+        Transaction.run(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
             const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));

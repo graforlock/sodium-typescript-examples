@@ -8,7 +8,7 @@ import Label from './label';
 import SLabel from './slabel';
 import SButton from './sbutton';
 
-import {transactionally, Cell} from 'sodiumjs';
+import {Transaction, Cell} from 'sodiumjs';
 
 class FRP
 {
@@ -16,7 +16,7 @@ class FRP
 
     public static main()
     {
-        transactionally(() =>
+        Transaction.run(() =>
         {
             const labels: Array<Label> = new Array<Label>(FRP.maxEmails + 2);
             const fields: Array<Component> = new Array<Component>(FRP.maxEmails + 2);
@@ -48,7 +48,7 @@ class FRP
             {
                 labels[row] = new Label(`Email # ${i + 1}`);
                 const ii: number = i;
-                const enabled: Cell<Boolean> = num.value.map(n -> ii < n);
+                const enabled: Cell<Boolean> = num.value.map(n => ii < n);
                 const email: STextField = new STextField("", /*, enabled */);
                 fields[row] = email;
                 valids[row] = email.text.lift(num.value, (e, n) =>
