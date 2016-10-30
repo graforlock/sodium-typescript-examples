@@ -10,7 +10,7 @@ class TextField
     public text: Cell<string>;
     public sUserChanges: Stream<string>;
 
-    private allow: Cell<Boolean>;
+    private allow: Cell<boolean>;
     private input: HTMLInputElement;
 
     constructor(initText: string, sText: Stream<string> = new Stream<string>())

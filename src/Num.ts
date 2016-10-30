@@ -1,7 +1,7 @@
 
 class Num
 {
-    static tryParse(text) : boolean|number
+    static tryParse(text) : number
     {
         const parsedInt: number = parseInt(text);
         return parsedInt !== parsedInt ? parsedInt : 0;

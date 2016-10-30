@@ -1,7 +1,9 @@
 import STextField from './stext-field';
+import SButton from './SButton';
+
 import Num from './Num';
 
-import { StreamLoop, Cell } from 'sodiumjs';
+import {StreamLoop, Stream, Cell, transactionally} from 'sodiumjs';
 
 class SSpinner
 {
@@ -9,12 +11,26 @@ class SSpinner
 
     constructor(initValue: number)
     {
-        const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-        const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
-
-        this.value = textField.text.map(text =>
+        transactionally(() =>
         {
-            Num.tryParse(text);
+            const sSetValue: StreamLoop<number> = new StreamLoop<number>();
+
+            const plus: SButton = new SButton("+");
+            const minus: SButton = new SButton("-");
+
+            const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
+
+            this.value = textField.text.map(text => Num.tryParse(text));
+
+            const sPlusDelta: Stream<number> = plus.sClicked.map(u => 1);
+            const sMinusDelta: Stream<number> = plus.sClicked.map(u => -1);
+            const sDelta: Stream<number> = sPlusDelta.orElse(sMinusDelta);
+
+            sSetValue.loop(
+                sDelta.snapshot(
+                    this.value,
+                    (delta, value) => delta + value
+                ));
         });
     }
 
