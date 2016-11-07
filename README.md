@@ -11,6 +11,6 @@ Examples:
 - [ ] [Filter Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/filter-primitive)
 - [ ] [Form Validation](https://github.com/graforlock/sodium-typescript-examples/tree/form-validation)
 - [x] [Lift Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/lift-primitive)
-- [ ] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/spinner)
+- [ ] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/sspinner)
 
 ######*- the tick means _OK: its possible to reproduce given example with the Typescript API_
