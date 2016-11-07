@@ -1,8 +1,8 @@
-class Optional
+class Optional<T>
 {
     protected value: any;
 
-    constructor(x)
+    constructor(x: T)
     {
         this.value = x;
     }
@@ -12,12 +12,22 @@ class Optional
         return (this.value === null || this.value === undefined || this.value !== this.value);
     }
 
-    public static of(x) : Optional
+    public static of<T>(x: T) : Optional<T>
     {
         return new Optional(x);
     }
 
-    public map(f: Function) : None | Just
+    public concat<T>(other: Optional<T>) : Optional<T>
+    {
+        return new Optional([].concat(this.value, other.value));
+    }
+
+    public empty() : None<null>
+    {  
+        return new None(null);
+    }
+
+    public map(f: Function) : None<null> | Just<any>
     {
         return this.isNothing() ? None.of(null) : Just.of(f(this.value));
     }   
@@ -32,45 +42,45 @@ class Optional
         return this.constructor === Just;
     }
 
-    public flatten() : None | any
+    public flatten() : None<null> | any
     {
         return this.isNone() ? None.of(null) : this.value;
     }
-
-    public flatMap(f: Function) : None | any
-    {
-        return this.map(f).flatten();
-    }
 }
 
-class None extends Optional
+class None<T> extends Optional<T>
 {
-    constructor(x)
+    constructor(x : T)
     {
         super(x);
     }
 
-    public static of(x) : None
+    public static of<T>(x: T) : None<T>
     {
         return new None(x);
     }
 
-    public flatten() : any
+    public flatten() : None<null>
     {
-        return this.value;
+        return new None<null>(null);
     }
 }
 
-class Just extends Optional
+class Just<T> extends Optional<T>
 {
-    constructor(x)
+    constructor(x: T)
     {
         super(x);
     }
 
-    public static of(x) : Just
+    public static of<T>(x: T) : Just<T>
     {
         return new Just(x);
+    }
+
+    public flatten() : T
+    {
+        return this.value;
     }
 }
 
