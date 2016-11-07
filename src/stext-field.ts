@@ -1,4 +1,4 @@
-import {Cell, Stream, StreamSink, StreamLoop} from 'sodiumjs';
+import {Cell, Stream, StreamSink, StreamLoop, Transaction} from 'sodiumjs';
 
 interface InputEvent extends Event
 {
@@ -10,23 +10,17 @@ class TextField
     private l: any;
     public text: Cell<string>;
     public sUserChanges: Stream<string>;
-
+    
     private allow: Cell<boolean>;
     private input: HTMLInputElement;
 
     constructor(initText: string, sText: Stream<string> = new Stream<string>())
     {
 
-        this.allow = sText.map(u => 1)
-            .accum(0, (d, b) => b + d)
-            .map(b => b == 0);
-
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
 
         this.text = sUserChangesSnk
-            .gate(this.allow)
-            .orElse(sText)
             .hold(initText);
 
         this.input = document.createElement('input');
@@ -39,11 +33,17 @@ class TextField
 
         this.render();
 
-        /* TODO: Missing Transaction.post() API
-           doesnt allow to register listener at this point. */
+        this.l = sText.listen(text => {
+            this.setText(text);
+        });
     }
 
-    render(): void
+    private setText(text: string) : void
+    {
+        this.input.value = text;
+    }
+
+    render() : void
     {
         document.body.appendChild(this.input);
     }

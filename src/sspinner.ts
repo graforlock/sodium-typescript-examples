@@ -3,7 +3,7 @@ import SButton from './SButton';
 
 import Num from './Num';
 
-import {StreamLoop, Stream, Cell, transactionally} from 'sodiumjs';
+import {StreamLoop, Stream, Cell, Transaction} from 'sodiumjs';
 
 class SSpinner
 {
@@ -11,12 +11,12 @@ class SSpinner
 
     constructor(initValue: number)
     {
-        transactionally(() =>
+        Transaction.run(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
             const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
-
-            this.value = textField.text.map(text => Num.tryParse(text));
+           
+            this.value = textField.text.map(s => Num.tryParse(s));
 
             const plus: SButton = new SButton("+");
             const minus: SButton = new SButton("-");
