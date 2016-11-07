@@ -1,11 +1,7 @@
 import Component from './Component';
+import DOMEvent from './DOMEvent';
 
 import {Cell, Stream, StreamSink} from 'sodiumjs';
-
-interface InputEvent extends Event
-{
-    target;
-}
 
 class TextField implements Component
 {
@@ -33,7 +29,7 @@ class TextField implements Component
 
         this.input = document.createElement('input');
         this.input.value = this.text.sample();
-        this.input.addEventListener('input', (event: InputEvent) =>
+        this.input.addEventListener('input', (event: DOMEvent) =>
         {
             this.text = this.text.map(() => event.target.value);
             sUserChangesSnk.send(event.target.value);
