@@ -1,6 +1,8 @@
-class Optional<T>
+import Monad from './Monad';
+
+class Optional<T> implements Monad<T>
 {
-    protected value: any;
+    protected value: T;
 
     constructor(x: T)
     {
@@ -17,14 +19,9 @@ class Optional<T>
         return new Optional(x);
     }
 
-    public concat<T>(other: Optional<T>) : Optional<T>
-    {
-        return new Optional([].concat(this.value, other.value));
-    }
-
-    public empty() : None<null>
+    public empty() : None<T>
     {  
-        return new None(null);
+        return new None<T>(null);
     }
 
     public map(f: Function) : None<null> | Just<any>
@@ -40,6 +37,11 @@ class Optional<T>
     public isJust() : boolean
     {
         return this.constructor === Just;
+    }
+
+    public flatMap(f: Function) : None<null> | any
+    {
+        return this.map(f).flatten();
     }
 
     public flatten() : None<null> | any

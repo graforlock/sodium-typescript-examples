@@ -1,1 +1,1 @@
-type Nothing<T> = T;
+type Nothing = undefined | null ;

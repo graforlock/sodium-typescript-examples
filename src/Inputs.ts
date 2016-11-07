@@ -1,5 +1,8 @@
 import {Stream, Cell, Unit} from 'sodiumjs';
 
+import UpDown from './UpDown';
+import Key from './Key';
+
 class Inputs
 {
     constructor(public readonly sNozzle1: Stream<UpDown>,

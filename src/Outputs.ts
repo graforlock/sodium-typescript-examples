@@ -1,16 +1,19 @@
 import {Cell, Stream, Unit} from 'sodiumjs';
+import Delivery from './Delivery';
+import Sale from './Sale';
 
 class Outputs
 {
-    constructor(public readonly delivery: Cell<Delivery> = new Cell<Delivery>(Delivery.OFF),
-    public readonly presetLCD: Cell<string> = new Cell<string>(""),
-    public readonly saleCostLCD: Cell<string> = new Cell<string>(""),
-    public readonly saleQuantityLCD: Cell<string> = new Cell<string>(""),
-    public readonly priceLCD1: Cell<string> = new Cell<string>(""),
-    public readonly priceLCD2: Cell<string> = new Cell<string>(""),
-    public readonly priceLCD3: Cell<string> = new Cell<string>(""),
-    public readonly sBeep: Stream<Unit> = new Stream<Unit>(),
-    public readonly sSaleComplete: Stream<Sale> = new Stream<Sale>())
+    constructor(
+        public readonly delivery: Cell<Delivery> = new Cell<Delivery>(Delivery.OFF),
+        public readonly presetLCD: Cell<string> = new Cell<string>(""),
+        public readonly saleCostLCD: Cell<string> = new Cell<string>(""),
+        public readonly saleQuantityLCD: Cell<string> = new Cell<string>(""),
+        public readonly priceLCD1: Cell<string> = new Cell<string>(""),
+        public readonly priceLCD2: Cell<string> = new Cell<string>(""),
+        public readonly priceLCD3: Cell<string> = new Cell<string>(""),
+        public readonly sBeep: Stream<Unit> = new Stream<Unit>(),
+        public readonly sSaleComplete: Stream<Sale> = new Stream<Sale>())
     {}
     public setDelivery(delivery: Cell<Delivery>) : Outputs
     {
