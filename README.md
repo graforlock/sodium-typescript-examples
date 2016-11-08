@@ -9,7 +9,7 @@ If you wish to contribute, submit a pull request or, alternatively, ask me to be
 Examples:
 
 - [ ] [Filter Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/filter-primitive)
-- [ ] [Form Validation](https://github.com/graforlock/sodium-typescript-examples/tree/form-validation)
+- [x] [Form Validation](https://github.com/graforlock/sodium-typescript-examples/tree/form-validation)
 - [x] [Lift Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/lift-primitive)
 - [x] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/sspinner)
 
