@@ -1,7 +1,5 @@
 import SSpinner from './sspinner';
 
-import {Cell} from 'sodiumjs';
-
 class FRP
 {
     public static main()
