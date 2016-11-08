@@ -1,5 +1,5 @@
-import Button from './sbutton';
-import SLabel from './slabel';
+import Button from './SButton';
+import SLabel from './SLabel';
 import { CellLoop, Stream, Transaction } from 'sodiumjs';
 
 class FRP
