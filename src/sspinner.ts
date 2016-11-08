@@ -14,9 +14,10 @@ class SSpinner
         Transaction.run(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-            const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
-           
-            this.value = textField.text.map(s => Num.tryParse(s));
+            const textField: STextField = new STextField(String(initValue), sSetValue);
+
+            this.value = textField.sText
+                .hold(initValue); /*.text.map(s => Num.tryParse(s))*/
 
             const plus: SButton = new SButton("+");
             const minus: SButton = new SButton("-");
@@ -28,7 +29,7 @@ class SSpinner
             sSetValue.loop(
                 sDelta.snapshot(
                     this.value,
-                    (delta, value) => delta + value
+                    (delta, value) => { return delta + value; }
                 ));
         });
     }

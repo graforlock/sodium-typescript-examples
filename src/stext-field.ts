@@ -9,16 +9,17 @@ class TextField
 {
     private l: any;
     public text: Cell<string>;
+    public sText: Stream<number>;
     public sUserChanges: Stream<string>;
-    
-    private allow: Cell<boolean>;
+
     private input: HTMLInputElement;
 
-    constructor(initText: string, sText: Stream<string> = new Stream<string>())
+    constructor(initText: string, sText: Stream<number> = new Stream<number>())
     {
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
+        this.sText = sText;
 
         this.text = sUserChangesSnk
             .hold(initText);
@@ -31,16 +32,16 @@ class TextField
             sUserChangesSnk.send(event.target.value);
         });
 
-        this.render();
-
-        this.l = sText.listen(text => {
+        this.l = this.sText.listen(text => {
             this.setText(text);
         });
+
+        this.render();
     }
 
-    private setText(text: string) : void
+    private setText(text: number) : void
     {
-        this.input.value = text;
+        this.input.value = String(text);
     }
 
     render() : void
