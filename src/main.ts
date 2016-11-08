@@ -1,5 +1,5 @@
-import SLabel from './slabel';
-import STextField from './stext-field';
+import SLabel from './SLabel';
+import STextField from './STextField';
 
 import {Cell} from 'sodiumjs';
 
