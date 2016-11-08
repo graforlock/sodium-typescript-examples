@@ -1,7 +1,7 @@
 {
-  "name": "ts-boilerplate",
+  "name": "sodium-typescript-examples",
   "version": "1.0.0",
-  "description": "TS Boilerplate",
+  "description": "SodiumFRP Typescript",
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack --watch",
