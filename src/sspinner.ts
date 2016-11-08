@@ -14,10 +14,9 @@ class SSpinner
         Transaction.run(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-            const textField: STextField = new STextField(String(initValue), sSetValue);
+            const textField: STextField = new STextField(String(initValue), sSetValue.map(n => String(n)));
 
-            this.value = textField.sText
-                .hold(initValue); /*.text.map(s => Num.tryParse(s))*/
+            this.value = textField.sText.map(s => Number(s));
 
             const plus: SButton = new SButton("+");
             const minus: SButton = new SButton("-");

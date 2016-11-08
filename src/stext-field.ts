@@ -9,17 +9,17 @@ class TextField
 {
     private l: any;
     public text: Cell<string>;
-    public sText: Stream<number>;
+    public sText: Cell<string>;
     public sUserChanges: Stream<string>;
 
     private input: HTMLInputElement;
 
-    constructor(initText: string, sText: Stream<number> = new Stream<number>())
+    constructor(initText: string, sText: Stream<string> = new Stream<string>())
     {
 
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
-        this.sText = sText;
+        this.sText = sText.hold(initText);
 
         this.text = sUserChangesSnk
             .hold(initText);
@@ -39,7 +39,7 @@ class TextField
         this.render();
     }
 
-    private setText(text: number) : void
+    private setText(text: string) : void
     {
         this.input.value = String(text);
     }
