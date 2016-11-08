@@ -1,4 +1,3 @@
-import Component from './Component';
 import STextField from './STextField';
 import SButton from './SButton';
 
@@ -6,18 +5,18 @@ import Num from './Num';
 
 import {StreamLoop, Stream, Cell, Transaction} from 'sodiumjs';
 
-class SSpinner implements Component
+class SSpinner
 {
-    public value: Cell<number>;
+    private value: Cell<number>;
 
     constructor(initValue: number)
     {
         Transaction.run(() =>
         {
             const sSetValue: StreamLoop<number> = new StreamLoop<number>();
-            const textField: STextField = new STextField(String(initValue), sSetValue.map(v => String(v)));
+            const textField: STextField = new STextField(String(initValue), sSetValue.map(n => String(n)));
 
-            this.value = textField.text.map(text => Num.tryParse(text));
+            this.value = textField.sText.map(s => Number(s));
 
             const plus: SButton = new SButton("+");
             const minus: SButton = new SButton("-");
@@ -29,7 +28,7 @@ class SSpinner implements Component
             sSetValue.loop(
                 sDelta.snapshot(
                     this.value,
-                    (delta, value) => delta + value
+                    (delta, value) => { return delta + value; }
                 ));
         });
     }
