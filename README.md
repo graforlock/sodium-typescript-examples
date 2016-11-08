@@ -12,5 +12,6 @@ Examples:
 - [x] [Form Validation](https://github.com/graforlock/sodium-typescript-examples/tree/form-validation)
 - [x] [Lift Primitive](https://github.com/graforlock/sodium-typescript-examples/tree/lift-primitive)
 - [x] [Spinner](https://github.com/graforlock/sodium-typescript-examples/tree/sspinner)
+- [ ] [Petrol Pump](https://github.com/graforlock/sodium-typescript-examples/tree/petrol-pump)
 
 ######*- the tick means _OK: its possible to reproduce given example with the Typescript API_
