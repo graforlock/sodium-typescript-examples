@@ -1,4 +1,4 @@
-import {Cell, Operational} from 'sodiumjs';
+import {Cell, Operational, Transaction} from 'sodiumjs';
 
 class SLabel
 {
@@ -15,22 +15,17 @@ class SLabel
         this.label = document.createElement('h5');
         this.render();
 
-        /* TODO: Missing Transaction.post() API
-           doesn't allow to sample text at this point.
 
-            Example:
-
-         Transaction.post(0, () =>
+         Transaction.currentTransaction.post(0, () =>
          {
             this.setText(text.sample());
          })
-         ;*/
 
     }
 
-    setText(t: string)
+    setText(text: string)
     {
-        this.label.textContent = t;
+        this.label.textContent = text;
     }
 
     render()
