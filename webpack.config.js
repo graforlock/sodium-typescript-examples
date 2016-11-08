@@ -1,7 +1,18 @@
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin'),
+    argv = require('yargs').argv;
+
+var example = {
+    path: 'examples/ex',
+    ex: '1' /* default exercise */
+};
+
+if(argv.ex)
+{
+    example.ex = argv.ex;
+}
 
 module.exports = {
-    entry: './src/main.ts',
+    entry: './examples/ex' + example.ex + '/main.ts',
     output: {
         filename: './dist/bundle.js'
     },
@@ -15,11 +26,9 @@ module.exports = {
     },
     plugins: [
         new BrowserSyncPlugin({
-            // browse to http://localhost:3000/ during development,
-            // ./public directory is being served
             host: 'localhost',
             port: 3000,
-            server: { baseDir: ['dist'] }
+            server: { baseDir: [ example.path + example.ex ] }
         })
     ]
 };
