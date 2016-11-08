@@ -1,4 +1,4 @@
-import SSpinner from './sspinner';
+import SSpinner from './SSpinner';
 
 class FRP
 {

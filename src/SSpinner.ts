@@ -1,4 +1,4 @@
-import STextField from './stext-field';
+import STextField from './STextField';
 import SButton from './SButton';
 
 import Num from './Num';
