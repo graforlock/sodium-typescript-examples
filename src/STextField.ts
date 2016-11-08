@@ -1,6 +1,5 @@
-import Component from './Component';
-
 import {Cell, Stream, StreamSink} from 'sodiumjs';
+import Component from './Component';
 
 interface InputEvent extends Event
 {
@@ -11,24 +10,19 @@ class TextField implements Component
 {
     private l: any;
     public text: Cell<string>;
+    public sText: Cell<string>;
     public sUserChanges: Stream<string>;
 
-    private allow: Cell<boolean>;
     private input: HTMLInputElement;
 
     constructor(initText: string, sText: Stream<string> = new Stream<string>())
     {
 
-        this.allow = sText.map(u => 1)
-            .accum(0, (d, b) => b + d)
-            .map(b => b == 0);
-
         const sUserChangesSnk: StreamSink<string> = new StreamSink<string>();
         this.sUserChanges = sUserChangesSnk;
+        this.sText = sText.hold(initText);
 
         this.text = sUserChangesSnk
-            .gate(this.allow)
-            .orElse(sText)
             .hold(initText);
 
         this.input = document.createElement('input');
@@ -39,20 +33,19 @@ class TextField implements Component
             sUserChangesSnk.send(event.target.value);
         });
 
-        this.render();
-
-        this.l = sText.listen(text => 
-        {
+        this.l = this.sText.listen(text => {
             this.setText(text);
         });
+
+        this.render();
     }
 
     private setText(text: string) : void
     {
-        this.input.value = text;
+        this.input.value = String(text);
     }
 
-    render(): void
+    render() : void
     {
         document.body.appendChild(this.input);
     }

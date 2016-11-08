@@ -7,7 +7,7 @@ import {StreamLoop, Stream, Cell, Transaction} from 'sodiumjs';
 
 class SSpinner
 {
-    private value: Cell<number>;
+    public value: Cell<number>;
 
     constructor(initValue: number)
     {
