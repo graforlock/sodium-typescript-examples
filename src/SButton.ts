@@ -15,7 +15,7 @@ class SButton
         this.sClickedSink = new StreamSink<Unit>();
         this.sClicked = this.sClickedSink;
 
-        this.button.addEventListener('click', (event: Event) =>
+        this.button.addEventListener('click', () =>
         {
             this.sClickedSink.send(Unit.UNIT);
         });

@@ -1,6 +1,6 @@
 import Component from './Component';
-import STextField from './stext-field';
-import SButton from './sbutton';
+import STextField from './STextField';
+import SButton from './SButton';
 
 import Num from './Num';
 

@@ -2,11 +2,11 @@ import Arr from './Arr';
 
 import Component from './Component';
 
-import STextField from './stext-field';
-import SSpinner from './sspinner';
-import Label from './label';
-import SLabel from './slabel';
-import SButton from './sbutton';
+import STextField from './STextField';
+import SSpinner from './SSpinner';
+import Label from './Label';
+import SLabel from './SLabel';
+import SButton from './SButton';
 
 import {Transaction, Cell} from 'sodiumjs';
 
