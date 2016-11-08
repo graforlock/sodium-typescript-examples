@@ -1,12 +1,12 @@
 import Button from './sbutton';
 import SLabel from './slabel';
-import { CellLoop, Stream, transactionally } from 'sodiumjs';
+import { CellLoop, Stream, Transaction } from 'sodiumjs';
 
 class FRP
 {
     public static main()
     {
-        transactionally(() =>
+        Transaction.run(() =>
         {
             const value: CellLoop<number> = new CellLoop<number>();
             const label: SLabel = new SLabel(value.map(i => i.toString()));
