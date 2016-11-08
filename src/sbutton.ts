@@ -20,11 +20,7 @@ class SButton
             this.sClickedSink.send(Unit.UNIT);
         });
 
-        /* TODO: Missing Transactional.post API for:
-         */
-
-            Transaction.currentTransaction.post(0, () => this.setEnabled(enabled.sample()));
-
+        Transaction.currentTransaction.post(0, () => this.setEnabled(enabled.sample()));
 
         this.l = Operational.updates(enabled).listen(ena => this.setEnabled(ena));
         this.render();

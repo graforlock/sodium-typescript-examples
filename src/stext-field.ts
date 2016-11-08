@@ -41,8 +41,15 @@ class TextField implements Component
 
         this.render();
 
-        /* TODO: Missing Transaction.post() API
-           doesnt allow to register listener at this point. */
+        this.l = sText.listen(text => 
+        {
+            this.setText(text);
+        });
+    }
+
+    private setText(text: string) : void
+    {
+        this.input.value = text;
     }
 
     render(): void
