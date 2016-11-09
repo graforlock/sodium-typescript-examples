@@ -14,4 +14,6 @@ Examples:
 - [x] Spinner
 - [ ] [Petrol Pump (Draft)](https://github.com/graforlock/sodium-typescript-examples/tree/petrol-pump)
 
+Examples are in ```examples``` directory, you can build individual one by typing ```npm start -- --ex=1``` if you omit ``--ex`` argument, it will then default to ```ex1```.
+
 ######*- the tick means _OK: its possible to reproduce given example with the Typescript API_
